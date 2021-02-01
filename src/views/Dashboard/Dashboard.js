@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Form, handleSubmit } from "react";
 import Server from "../../services/server";
 import CallCondition from "./CallCondition";
 import CloseProcess from "./CloseProcess";
@@ -20,8 +20,10 @@ import Page16 from "./Page16";
 import Page17 from "./Page17";
 import Page18 from "./Page18";
 import Page19 from "./Page19";
-import {Form} from "react-bootstrap";
 import Stopwatch from "../Timer/Components/Stopwatch";
+import NotizenEmail from "../Email/NotizenEmail";
+
+
 
 export default class Dashboard extends Component {
   state = {
@@ -41,6 +43,7 @@ export default class Dashboard extends Component {
     contactperson: "",
     contacts: [],
     companies: [],
+   
     // step 2
 
     introduction: "",
@@ -48,6 +51,7 @@ export default class Dashboard extends Component {
     later_email: "",
     task_note: "",
     task_deadline: "",
+    sendEmail:"",
   };
 
   nextStep = () => {
@@ -234,11 +238,27 @@ export default class Dashboard extends Component {
             </div>
           </div>
           <div className="col-md-4">
-            <Form.Group controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Notizen</Form.Label>
-            <Form.Control as="textarea" rows={25} />
-          </Form.Group>
+            <NotizenEmail />
+            <form onSubmit={handleSubmit}>
+            <div>
+        <label>Notizen:</label>
+        <textarea
+          value={this.state.textAreaValue}
+          onChange={this.handleChange}
+          rows={25}
+          
+        />
+      </div>
+      <div>
+        <label htmlFor="email">Email:</label>
+        <input type="email" id="email" required />
+        
+      <button type="submit">Submit</button>
+      </div>
+
+    </form>
           </div>
+          
         </div>
     
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, Container } from "react-bootstrap";
-import {chronoExample} from "react-bootstrap";
+
 
 export default class Intorduction extends Component {
   continue = (e) => {
@@ -25,6 +25,7 @@ export default class Intorduction extends Component {
       task_note,
       task_deadline,
       
+
     } = this.props;
     return (
       <Container>
@@ -209,7 +210,9 @@ export default class Intorduction extends Component {
         <button type="button" className="btn btn-success" onClick={this.continue}>
           Next »
         </button>
+        
       </Container>
+      
       
       
       

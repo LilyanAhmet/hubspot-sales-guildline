@@ -1,13 +1,26 @@
 require("dotenv").config();
 const express = require("express");
+const router = express.Router();
+const nodemailer = require("nodemailer");
 var request = require("request");
 const bodyParser = require("body-parser"); //important for requests
 const cookieParser = require("cookie-parser"); // dealing with env parameteres
 var cors = require("cors");
 const path = require("path");
+
+
+
+
 /*********************************** */
 const app = express();
 app.use(cors());
+
+
+/*Added For email*/
+
+
+/////////
+
 app.use(bodyParser.urlencoded({ extended: true })); // using middleware from query string
 app.use(bodyParser.json());
 app.use(express.static("/build"));
@@ -168,6 +181,61 @@ app.post("/api/company-qimia", function (req, res) {
 
 app.get("/*", (req, res) => {
   res.sendfile(path.join(__dirname, "..", "public", "index.html"));
+});
+
+
+
+///Email implementations
+
+ const NotizenEmail = nodemailer.createTransport({
+  host: 'send.one.com',
+  port: 465,
+  secure: false,
+  auth: {
+      user: 'k.kilic@qimia.de',
+      pass: 'Kilic.2013'
+  },
+  tls:{
+    rejectUnauthorized:false
+  }
+});  
+
+
+ NotizenEmail.verify((error) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("Ready to Send");
+  }
+});
+ 
+
+var mailMessage = {
+  from: 'k.kilic@qimia.de',
+  to: 'kinemkilic95@gmail.com',
+  subject: 'Test',
+  text: 'Enter Email Message'
+};
+
+ /*NotizenEmail.sendMail(mailMessage, function(error, data){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + data.response);
+  }
+});*/
+ 
+
+router.post("/email", (req, res) => {
+  console.log('Email response arrived.');
+
+   NotizenEmail.sendMail(mailMessage, function(error, data){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + data.response);
+    }
+  }); 
 });
 
 app.listen(3001, () => {

@@ -19,6 +19,9 @@ export default class CallCondition extends Component {
   onClickHandler  = event => {
     const value = event.target.innerHTML;
     console.log(value)
+ }
+  sendEmail(e) {
+  e.preventDefault();
   }
 
   render() {

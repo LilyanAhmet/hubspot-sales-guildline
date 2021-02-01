@@ -6,10 +6,14 @@ import Dashboard from "./views/Dashboard";
 import Layout from "./views/hoc/layout";
 import CallBack from "./services/callback";
 import "./App.css";
+import NotizenEmail from "./views/Email/NotizenEmail";
 
 const loading = () => (
   <div className="animated fadeIn pt-3 text-center">Loading...</div>
 );
+
+
+
 // Pages
 
 class App extends Component {
@@ -31,7 +35,11 @@ class App extends Component {
           </Layout>
         </React.Suspense>
       </BrowserRouter>
+                 
+
     );
   }
 }
+
+  
 export default App;
