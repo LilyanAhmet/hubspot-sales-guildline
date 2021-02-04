@@ -5,8 +5,18 @@ const bodyParser = require("body-parser"); //important for requests
 const cookieParser = require("cookie-parser"); // dealing with env parameteres
 var cors = require("cors");
 const path = require("path");
+const publicPath = path.join(__dirname, '..', 'public');
+const port = process.env.PORT || 3000;
 /*********************************** */
 const app = express();
+app.use(express.static(publicPath));
+app.get('*', (req, res) => {
+   res.sendFile(path.join(publicPath, 'index.html'));
+});
+app.listen(port, () => {
+   console.log('Server is up!');
+});
+
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true })); // using middleware from query string
 app.use(bodyParser.json());
