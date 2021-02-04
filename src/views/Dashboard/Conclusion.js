@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Server from "../../services/server";
+
 export default class Conclusion extends Component {
   continue = (e) => {
     e.preventDefault();
@@ -9,171 +9,120 @@ export default class Conclusion extends Component {
     e.preventDefault();
     this.props.prevStep();
   };
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const company = {
-      properties: [
-        { name: "name", value: this.props.companyName },
-        { name: "description", value: this.props.companyDiscription },
-      ],
-    };
-    const contact = {
-      properties: [
-        { property: "email", value: this.props.email },
-        { property: "firstname", value: this.props.name },
-        { property: "lastname", value: this.props.surname },
-        { property: "phone", value: this.props.phone }
-      ],
-    };
-    Server.createCompany(company).then((res) => {
-      console.log("res is" + res);
-      Server.createContact(contact).then((res)=> {
-        console.log("contact res is" + res);
-      })
-    });
-  
-  };
   render() {
     const {
       name,
-      surname,
+      position,
       contactperson,
       companyName,
-      companyDiscription,
       phone,
       kind,
       email,
-      introduction,
       newold,
       company,
-      meeting_with_expert,
-      later_email,
-      task_note,
-      task_deadline,
+      question1,
+      question2,
+      question3,
+      question4,
+      question5,
+      question6,
+      question7,
+      taskName,
+      taskDate,
+      taskDesc,
     } = this.props;
-    
+
     return (
       <div>
-        <h4>Here is the information you entered:</h4>
-        Who will you call?:
-        <br />
+        <h3>Here is the information you entered:</h3>
+        <p> Wen möchtest du anrufen?</p>
         <b>{newold}</b>
         <hr />
-        <h5>Call Condition</h5>
+        <br />
+        <p>Um was für eine Art Anruf handelt es sich?</p>
+        <b>{kind}</b>
+        <hr />
+        <br/>
         {newold === "new" && (
           <div>
-            <p>What kind of call will you do?</p>
-
-            <b>{kind}</b>
-            
-            <hr />
-            <p>Please enter company name:</p>
-
-            <b>{companyName}</b>
-            <hr />
-            <p>Please enter company discription:</p>
-
-            <b>{companyDiscription}</b>
-            <hr />
-            <p>Please enter customer name:</p>
-
-            <b>{name}</b>
-            <hr />
-            <p>Please enter customer family name:</p>
-
-            <b>{surname}</b>
-            <hr />
-            <p>Please enter customer email address:</p>
-
-            <b>{email}</b>
-            <hr />
-            <p>Please enter customer phone number:</p>
-
-            <b>{phone}</b>
-            <hr />
+            <p>Full Name : {name}</p>
+            <p>Companny Name : {companyName}</p>
+            <p>Postion : {position}</p>
+            <p>Email Address : {email}</p>
+            <p>Phone Number : {phone}</p>
           </div>
         )}
-        {newold === "old" && (
-          <div>
-            <p>Please choose the company?</p>
-
-            <b>{company}</b>
-            <hr />
-            <p>What kind of call will you do?</p>
-
-            <b>{kind}</b>
-            <hr />
-            <p>
-              If you already know who you will call, please chose your contact
-              person (if you don't have a specific contact person go next):
-            </p>
-
-            <b>{contactperson}</b>
-            <hr />
-          </div>
-        )}
-        <br />
-        <h5>Intoduction</h5>
-        We would like to become your additional IT partner, but only if it
-        really makes sense for you. I only have a quick question about this, is
-        that okay with you?
-        <br />
-        <b>{introduction}</b>
         <hr />
-        {introduction === "yes" && (
+        {newold === "new" && (
           <div>
-            <p>
-              If you would like to learn more about this product and see if it
-              is suitable for your company, we can fix a meeting with one of our
-              experts / CEO / Managers.
-            </p>
-            <b>{meeting_with_expert}</b>
-            <hr />
-            {meeting_with_expert === "appointment" && (
-              <div>
-                <p>Write a task note (you can find in: Hubspot Task)</p>
-
-                <b>{task_note}</b>
-                <hr />
-                <p>Write a task note (you can find in: Hubspot Task)</p>
-
-                <b>{task_deadline}</b>
-                <hr />
-              </div>
-            )}
-            {meeting_with_expert === "more_info" && (
-              <div>
-                <p>Could you give me your e-mail please?</p>
-
-                <b>{later_email}</b>
-                <hr />
-              </div>
-            )}
+            <p>Company Name : {company}</p>
+            <p>Contact Person : {contactperson}</p>
           </div>
         )}
-        {introduction === "later" && (
-          <div>
-            <p>Could you give me your e-mail please?</p>
-            <b>{later_email}</b>
-          </div>
-        )}
-        {introduction === "appointment" && (
-          <div>
-            <p>Write a task note (you can find in: Hubspot Task)</p>
-
-            <b>{task_note}</b>
-            <hr />
-            <p>Write a task note (you can find in: Hubspot Task)</p>
-
-            <b>{task_deadline}</b>
-            <hr />
-          </div>
-        )}
+        <hr />
+        <br />
+        <h6>Einleitung</h6>
+        Sie haben sich bei uns gemeldet, um herauszufinden, ob Ihnen unsere
+        Dienstleistungen im Bereich Video weiterhelfen können, ist das richtig?
+        <br />
+        <b>{question1}</b>
+        <br />
+        <h6>Ich habe mich icht beworben</h6>
+        "Ja, das kann ich gut verstehen, also wir sind "Musterfirma" eine
+        Filmproduktionsfirma aus "Ort" und haben uns auf die Medienberatung
+        spezialisiert. Ich lasse Ihnen nach dem Gespräch gerne noch einmal
+        unsere Website zukommen und im Fachgespräch lernen Sie uns dann richtig
+        kennen."
+        <br />
+        <b>{question2}</b>
+        <br />
+        <hr />
+        <h6>Fragen stellen</h6>
+        <br />
+        <b>{question3}</b>
+        <br />
+        <hr />
+        <h6>
+          Wenn nach diesen Behandlungen keine Aussage vom Kunden kommt oder das
+          Budget zu niedrig ist:
+        </h6>
+        "Wir haben in der Vergangenheit festgestellt, dass eine Investition
+        zwischen 3.900 EUR - 8.500 notwendig ist, um den von Ihnen beschriebenen
+        Film zu realisieren."
+        <br />
+        <b>{question4}</b>
+        <br />
+        <hr />
+        <h6>Sobald eine Summe genannt wurde:</h6>
+        "Und diesen Betrag sind Sie auch wirklich bereit für Ihren Film zu
+        investieren?"
+        <br />
+        <b>{question5}</b>
+        <br />
+        <hr />
+        <h6>Das ist aber teuer.../ oder andere Einwände</h6>
+        "Diese erste Einschätzung ist erstmal ein geschätzter Preisrahmen. In
+        welchem Bereich des eben genannten Rahmens, sehen Sie sich denn?"
+        <br />
+        <b>{question6}</b>
+        <br />
+        <hr />
+        <h6>Wenn dies nicht möglich ist, dann:</h6>
+        "Zusätzlich bieten wir unseren Kunden noch eine Kompaktlösung an, die
+        bei einer Investitionssumme von 2.900 EUR liegt, ist das für Sie
+        möglich?"
+        <br />
+        <b>{question7}</b>
+        <hr />
+        <hr />
+        <div>Task Name</div>
+        <b>{taskName}</b>
+        <div>Task Date</div>
+        <b>{taskDate}</b>
+        <div>Task description</div>
+        <b>{taskDesc}</b>
         <button type="button" className="btn btn-warning" onClick={this.back}>
           « Back
-        </button>
-        <button type="button" className="btn btn-primary" onClick={this.continue}>
-          Next 
         </button>
       </div>
     );

@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Form, Container } from "react-bootstrap";
 
 export default class Intorduction extends Component {
+  page = (number) => {
+    this.props.goToStep(number);
+  };
   continue = (e) => {
     e.preventDefault();
     this.props.nextStep();
@@ -14,7 +17,6 @@ export default class Intorduction extends Component {
 
   render() {
     const {
-      introduction,
       handleChange,
       contactperson,
       company,
@@ -23,7 +25,12 @@ export default class Intorduction extends Component {
     } = this.props;
     return (
       <Container>
-        <h4>Bestehender Kontakt</h4>
+        <h3>Bestehender Kontakt</h3>
+        <p>
+          Wenn du schon weißt, wen du anrufen möchtest, wähle bitte deine
+          Kontaktperson, (sofern du keine konkrete Ansprechperson hast, klicke
+          „next“)
+        </p>
         <Form.Group controlId="exampleForm.ControlSelect1">
           <Form.Label>Please choose the company?</Form.Label>
           <Form.Control
@@ -69,7 +76,7 @@ export default class Intorduction extends Component {
         <button
           type="button"
           className="btn btn-success"
-          onClick={this.continue}
+          onClick={() => this.page(4)}
         >
           Next »
         </button>
